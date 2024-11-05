@@ -1,0 +1,94 @@
+/* Conteneur principal du login */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background: linear-gradient(to right, #00a896, #05668d);
+    padding: 20px;
+  }
+  
+  /* Card du formulaire */
+  mat-card {
+    width: 400px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #028090;
+  }
+  
+  /* Titre du card */
+  mat-card-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #028090;
+  }
+
+  
+  
+  /* Contenu du card */
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Style des champs de formulaire */
+  mat-form-field {
+    width: 100%;
+  }
+  
+  /* Agrandir la hauteur de l'input */
+  .inputLarge {
+    height: 50px; /* Ajuster la hauteur */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 1.2rem;
+    box-sizing: border-box;
+  }
+  
+  /* Wrapper du form-field pour une meilleure présentation */
+  .mat-form-field-wrapper {
+    padding: 8px 0; /* Ajoute du padding interne */
+  }
+  
+  /* Bouton principal */
+  button[mat-raised-button] {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    background-color: #02c39a;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  button[mat-raised-button]:hover {
+    background-color: #028090;
+    transform: translateY(-2px); /* Ajoute un petit effet de "flottement" */
+  }
+  
+  /* Bouton Google Login */
+  .google-login {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .google-login button {
+    background-color: #f6416c;
+    color: white;
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .google-login button:hover {
+    background-color: #d63347;
+    transform: translateY(-2px); /* Ajoute un petit effet de "flottement" */
+  }
+  

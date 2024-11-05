@@ -1,0 +1,51 @@
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background: linear-gradient(to left, #f7fff7, #00a896);
+    padding: 20px;
+  }
+  
+  mat-card {
+    width: 400px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    background: #ffffff;
+    border: 1px solid #028090;
+  }
+  
+  mat-card-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #05668d;
+  }
+  
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+  }
+  
+  button[mat-raised-button] {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    background-color: #00a896;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[mat-raised-button]:hover {
+    background-color: #05668d;
+  }
+  
