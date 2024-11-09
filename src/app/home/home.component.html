@@ -1,47 +1,30 @@
-<div *ngIf="authService.isLoggedIn(); else notLoggedIn">
-    <h2>Bienvenue, {{ authService.getUserEmail() }} !</h2>
 
-    <div *ngIf="authService.isLoggedIn(); else notLoggedIn">
-        <h2>Bienvenue, {{ authService.getUserEmail() }} !</h2>
-        <button mat-raised-button color="warn" (click)="logout()">Se déconnecter</button>
-    
-        <!-- Conteneur de la carte -->
-        <mat-card>
-            <mat-card-title>Événements Locaux</mat-card-title>
-            <mat-card-content>
-              <google-map
-                [height]="'500px'"
-                [width]="'100%'"
-                [options]="mapOptions">
-                
-                <map-marker *ngFor="let event of events"
-                            [position]="{ lat: event.lat, lng: event.lng }"
-                            [title]="event.name">
-                </map-marker>
-              </google-map>
-            </mat-card-content>
-        </mat-card>
-    </div>
-    
-    <ng-template #notLoggedIn>
-      <div class="auth-container">
-        <div class="toggle-buttons">
-          <button mat-stroked-button color="primary" (click)="toggleAuthForm()">
-            {{ isLogin ? 'Créer un compte' : 'Se connecter' }}
-          </button>
-        </div>
-    
-        <div class="auth-form">
-          <app-login *ngIf="isLogin"></app-login>
-          <app-signup *ngIf="!isLogin"></app-signup>
-        </div>
+
+<div *ngIf="authService.isLoggedIn() | async; else notLoggedIn">
+  <h2>Bienvenue, {{ authService.getUserEmail() | async}} !</h2>
+  
+  <div id="map" style="height: 500px;"></div>
+
+
+  <ng-template #notLoggedIn>
+    <div class="auth-container">
+      <div class="toggle-buttons">
+        <button mat-stroked-button color="primary" (click)="toggleAuthForm()">
+          {{ isLogin ? 'Créer un compte' : 'Se connecter' }}
+        </button>
       </div>
-    </ng-template>
-    
 
-    <button mat-raised-button color="warn" (click)="logout()">Se déconnecter</button>
+      <div class="auth-form">
+        <app-login *ngIf="isLogin"></app-login>
+        <app-signup *ngIf="!isLogin"></app-signup>
+      </div>
+    </div>
+  </ng-template>
 
-    
+
+  <button mat-raised-button color="warn" (click)="logout()">Se déconnecter</button>
+
+
 </div>
 
 <ng-template #notLoggedIn>
@@ -51,6 +34,8 @@
         {{ isLogin ? 'Créer un compte' : 'Se connecter' }}
       </button>
     </div>
+
+
 
     <div class="auth-form">
       <app-login *ngIf="isLogin"></app-login>
