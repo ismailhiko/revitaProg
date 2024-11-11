@@ -1,0 +1,26 @@
+<div class="local-search-container">
+    <h3>Locaux à proximité</h3>
+    
+    <!-- Barre de recherche avec adresse et rayon -->
+    <form [formGroup]="searchForm" (ngSubmit)="searchByAddress()" class="search-bar">
+      <input formControlName="address" type="text" placeholder="Entrez une adresse" class="address-input">
+      <input formControlName="radius" type="number" placeholder="Rayon en mètres (ex: 10000)" class="radius-input">
+      <button type="submit" class="btn-search">Rechercher</button>
+      <button type="button" (click)="getUserLocation()" class="btn-location">Ma position</button>
+    </form>
+  
+    <div id="map" style="height: 400px;"></div>
+  
+    <!-- Liste des locaux affichée uniquement après une recherche -->
+    <ul class="local-list" *ngIf="showLocauxList">
+      <li *ngFor="let local of locaux" class="local-item">
+        <img [src]="local.imageUrl" alt="Image de {{ local.name }}" class="local-image">
+        <div class="local-info">
+          <h4>{{ local.name }}</h4>
+          <p>{{ local.address }}</p>
+          <p>Type : {{ local.type }}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  

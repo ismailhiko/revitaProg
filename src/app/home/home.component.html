@@ -1,36 +1,34 @@
 <div *ngIf="authService.isLoggedIn() | async; else notLoggedIn">
-  <h2 class="welcome-message">Bienvenue, {{ authService.getUserEmail() | async}} !</h2>
+  <h2 class="welcome-message">Bienvenue, {{ authService.getUserEmail() | async }} !</h2>
   <hr class="underline">
   <app-menu (ajouterEvenementClicked)="toggleAjouterEvenement()"></app-menu>
 
-  <!-- Formulaire Ajouter Evenement : s'affiche si `showAjouterEvenement` est vrai -->
-  <div *ngIf="showAjouterEvenement">
-    <app-ajouter-evenement (evenementAjoute)="onEvenementAjoute($event)"></app-ajouter-evenement>
+  <!-- Boutons de bascule entre la recherche d'événements et de locaux -->
+  <div class="toggle-buttons">
+    <button mat-raised-button color="primary" (click)="toggleAfficherEvenements()">
+      Rechercher des événements
+    </button>
+    <button mat-raised-button color="accent" (click)="toggleAfficherLocaux()">
+      Rechercher des locaux
+    </button>
   </div>
 
-  <div id="map" style="height: 500px;"></div>
-
-
-
-  <ng-template #notLoggedIn>
-    <div class="auth-container">
-      <div class="toggle-buttons">
-        <button mat-stroked-button color="primary" (click)="toggleAuthForm()">
-          {{ isLogin ? 'Créer un compte' : 'Se connecter' }}
-        </button>
-      </div>
-
-      <div class="auth-form">
-        <app-login *ngIf="isLogin"></app-login>
-        <app-signup *ngIf="!isLogin"></app-signup>
-      </div>
+  <!-- Affichage conditionnel de la recherche d'événements -->
+  <div *ngIf="modeAffichage === 'evenements'">
+    <h3>Recherche d'événements</h3>
+    <div *ngIf="showAjouterEvenement">
+      <app-ajouter-evenement (evenementAjoute)="onEvenementAjoute($event)"></app-ajouter-evenement>
     </div>
-  </ng-template>
+    <div id="map" style="height: 500px;"></div>
+  </div>
 
+  <!-- Affichage conditionnel de la recherche de locaux -->
+  <div *ngIf="modeAffichage === 'locaux'">
+    <h3>Recherche de locaux</h3>
+    <app-location-locaux></app-location-locaux>
+  </div>
 
   <button id="deconnexion" mat-raised-button (click)="logout()">Se déconnecter</button>
-
-
 </div>
 
 <ng-template #notLoggedIn>
@@ -40,9 +38,6 @@
         {{ isLogin ? 'Créer un compte' : 'Se connecter' }}
       </button>
     </div>
-
-
-
     <div class="auth-form">
       <app-login *ngIf="isLogin"></app-login>
       <app-signup *ngIf="!isLogin"></app-signup>

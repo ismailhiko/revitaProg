@@ -19,6 +19,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { AjouterEvenementComponent } from '../ajouter-evenement/ajouter-evenement.component';
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 import { MenuComponent } from "../menu/menu.component";
+import { LocationLocauxComponent } from '../location-locaux/location-locaux.component';
+
 
 @Component({
   selector: 'app-home',
@@ -33,6 +35,7 @@ import { MenuComponent } from "../menu/menu.component";
     SignupComponent,
     HttpClientModule,
     AjouterEvenementComponent,
+    LocationLocauxComponent,
     MenuComponent
 ],
   templateUrl: './home.component.html',
@@ -47,6 +50,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   isMapInitialized = false;
 
   showAjouterEvenement: boolean = false;
+
+  modeAffichage: 'evenements' | 'locaux' = 'evenements'; // Valeur par défaut : recherche d'événements
+
 
   constructor(public authService: AuthService, private http: HttpClient, public dialog: MatDialog) {}
 
@@ -172,6 +178,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
       // Recherche des commerces autour de la position par défaut
       this.searchNearbyShops(fallbackLocation.lat, fallbackLocation.lon);
     }
+  }
+
+
+  toggleAfficherEvenements() {
+    this.modeAffichage = 'evenements';
+  }
+
+  toggleAfficherLocaux() {
+    this.modeAffichage = 'locaux';
   }
   
 
