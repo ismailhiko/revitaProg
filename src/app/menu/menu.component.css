@@ -23,5 +23,12 @@
   .menu button:hover {
     color: #666; /* Changement de couleur au survol */
   }
+
+  .icon {
+    width: 20px; /* Largeur de l'icône */
+    height: 20px; /* Hauteur de l'icône */
+    margin-right: 8px; /* Espacement entre l'icône et le texte */
+    vertical-align: middle; /* Aligner l'icône verticalement avec le texte */
+  }
   
   

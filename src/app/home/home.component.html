@@ -1,5 +1,6 @@
 <div *ngIf="authService.isLoggedIn() | async; else notLoggedIn">
   <h2 class="welcome-message">Bienvenue, {{ authService.getUserEmail() | async}} !</h2>
+  <hr class="underline">
   <app-menu (ajouterEvenementClicked)="toggleAjouterEvenement()"></app-menu>
 
   <!-- Formulaire Ajouter Evenement : s'affiche si `showAjouterEvenement` est vrai -->
@@ -27,7 +28,7 @@
   </ng-template>
 
 
-  <button id="deconnexion" mat-raised-button color="warn" (click)="logout()">Se déconnecter</button>
+  <button id="deconnexion" mat-raised-button (click)="logout()">Se déconnecter</button>
 
 
 </div>

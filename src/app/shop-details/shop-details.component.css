@@ -6,9 +6,10 @@
   
   .shop-photo {
     width: 100%;
-    height: auto;
+    height: 100px;
     border-radius: 8px;
     margin-bottom: 16px;
+    object-fit: cover;
   }
   
   .actions {
@@ -38,12 +39,17 @@
     color: #666;
   }
   
-  button {
-    background-color: #0A2540;
-    color: #ffffff;
-    border-radius: 25px;
-    padding: 10px 20px;
-    transition: all 0.3s ease;
+  button{
+    background-color: #333;   /* Couleur de fond noir-gris */
+    color: #ffffff;           /* Couleur de texte blanche */
+    font-weight: bold;        /* Texte en gras */
+    padding: 12px 20px;       /* Espacement interne pour agrandir les boutons */
+    border: none;             /* Suppression des bordures par défaut */
+    border-radius: 25px;      /* Bords arrondis pour un aspect moderne */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre douce pour un effet de profondeur */
+    cursor: pointer;          /* Curseur en mode pointeur */
+    transition: all 0.3s ease; /* Transition pour les effets de survol */
+    margin-top: 10px;
   }
   
   button:hover {

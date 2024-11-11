@@ -105,7 +105,7 @@
     background-color: transparent;
     color: #333; /* Couleur du bouton */
     font-size: 16px;
-    border-radius: 15px;
+    border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
     transition: color 0.3s;
@@ -115,5 +115,15 @@
   #deconnexion:hover {
     color: #666; /* Changement de couleur au survol */
   }
+
+  .underline {
+    width: 25%; /* Largeur de la ligne */
+    margin: 0 auto; /* Centrer la ligne */
+    border: 0; /* Supprimer la bordure par défaut */
+    border-bottom: 1px solid #333; /* Bordure grise claire */
+    margin-top: 10px; /* Espacement au-dessus */
+    margin-bottom: 30px;
+  }
+  
   
   

@@ -210,7 +210,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   private searchNearbyShops(lat: number, lon: number): void {
-    const radius = 500; // Rayon de recherche en mètres
+    const radius = 2000; // Rayon de recherche en mètres
     const overpassUrl = `https://overpass-api.de/api/interpreter`;
   
     const query = `
@@ -235,10 +235,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
   
         if (response && response.elements) {
           response.elements.forEach((element: any) => {
+            console.log('Commerce trouvé:', element);
             if (element.lat && element.lon) {
               const shopName = element.tags.name || 'Nom inconnu';
               const shopType = element.tags.shop || 'Type inconnu';
               const address = element.tags['addr:street'] || 'Adresse inconnue';
+              const email = element.tags['contact:email'] || 'Email inconnu';
+              const longitude = element.lon;
+              const latitude = element.lat;
   
               const marker = L.marker([element.lat, element.lon], { icon: shopIcon })
                 .addTo(this.map)
@@ -249,8 +253,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
                     address: address,
                     rating: Math.random() * 5, // Simulation d'une note
                     reviewsCount: Math.floor(Math.random() * 1000), // Simulation du nombre d'avis
-                    phoneNumber: '+33 1 23 45 67 89', // Exemple statique
-                    photoUrl: 'assets/images/shop-example.jpg' // Image d'exemple
+                    phoneNumber: '+33 6 23 45 67 89', // Exemple statique
+                    photoUrl: '../../assets/shop.png', // Image d'exemple
+                    email: email,
+                    long : longitude,
+                    lat : latitude
                   });
                 });
             }
