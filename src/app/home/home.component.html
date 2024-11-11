@@ -1,13 +1,15 @@
-
-
 <div *ngIf="authService.isLoggedIn() | async; else notLoggedIn">
-  <h2>Bienvenue, {{ authService.getUserEmail() | async}} !</h2>
-  <app-ajouter-evenement (evenementAjoute)="onEvenementAjoute($event)"></app-ajouter-evenement>
+  <h2 class="welcome-message">Bienvenue, {{ authService.getUserEmail() | async}} !</h2>
+  <app-menu (ajouterEvenementClicked)="toggleAjouterEvenement()"></app-menu>
+
+  <!-- Formulaire Ajouter Evenement : s'affiche si `showAjouterEvenement` est vrai -->
+  <div *ngIf="showAjouterEvenement">
+    <app-ajouter-evenement (evenementAjoute)="onEvenementAjoute($event)"></app-ajouter-evenement>
+  </div>
+
   <div id="map" style="height: 500px;"></div>
 
-  
 
-  
 
   <ng-template #notLoggedIn>
     <div class="auth-container">
@@ -25,7 +27,7 @@
   </ng-template>
 
 
-  <button mat-raised-button color="warn" (click)="logout()">Se déconnecter</button>
+  <button id="deconnexion" mat-raised-button color="warn" (click)="logout()">Se déconnecter</button>
 
 
 </div>

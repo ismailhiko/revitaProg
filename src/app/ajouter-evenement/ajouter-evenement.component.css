@@ -1,0 +1,46 @@
+/* style elegant pour le formulaire */
+.event-form {
+    display: flex;
+    flex-direction: column; /* Alignement des éléments en colonne */
+    align-items: stretch; /* Les éléments prendront toute la largeur disponible */
+    background-color: #ffffff; /* Fond blanc pour le formulaire */
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Ombre douce */
+    margin: 20px auto; /* Centrage vertical */
+    width: 100%;
+    max-width: 600px; /* Limite la largeur du formulaire pour une meilleure lisibilité */
+  }
+  
+  /* Champs du formulaire - chaque champ prend la largeur totale du formulaire */
+  .mat-form-field {
+    width: 100% !important; /* Prend toute la largeur du conteneur parent */
+    margin-bottom: 20px;
+    box-sizing: border-box; /* Inclure padding et border dans la largeur */
+  }
+  
+  /* Bouton du formulaire */
+  button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #0a2540; /* Bleu foncé */
+    color: #ffffff; /* Texte blanc */
+    border-radius: 25px;
+    font-weight: bold;
+    border: none;
+    transition: all 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #666; /* Gris foncé pour le survol */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Assurez-vous que le formulaire lui-même est également en colonne */
+  .event-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espace entre chaque élément du formulaire */
+    width: 100%;
+  }
+  

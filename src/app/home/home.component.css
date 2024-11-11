@@ -55,5 +55,65 @@
     border-radius: 8px;
   }
   
+  .leaflet-control-geosearch {
+    width: 300px !important; /* Ajuster la largeur de la barre de recherche */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+  }
+  
+  .leaflet-control-geosearch input {
+    height: 30px !important; /* Ajuster la hauteur de l'input */
+    font-size: 16px !important;
+    padding: 5px;
+  }
+  
+  .leaflet-control-geosearch button {
+    height: 30px;
+    width: 30px;
+    background-color: #007bff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .leaflet-control-geosearch input:focus {
+    border-color: #007bff;
+  }
+
+
+  /* style elegant pour le formulaire */
+  #map {
+    width: 100%;
+    height: 500px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Ombre douce pour la carte */
+    margin-top: 20px;
+  }
+  
+  .welcome-message {
+    font-size: 24px;
+    color: #333;
+    margin: 20px 0;
+  }
+  
+  .welcome-message span {
+    font-style: italic;
+    color: #666; /* Texte de bienvenue en italique */
+  }
+  #deconnexion {
+    display: block;
+    margin: 20px auto; /* Centre horizontalement */
+    background-color: transparent;
+    color: #333; /* Couleur du bouton */
+    font-size: 16px;
+    border-radius: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s;
+
+  }
+
+  #deconnexion:hover {
+    color: #666; /* Changement de couleur au survol */
+  }
   
   

@@ -17,6 +17,8 @@ import { ShopDetailsComponent } from '../shop-details/shop-details.component';
 import * as L from 'leaflet';
 import { MatDialog } from '@angular/material/dialog';
 import { AjouterEvenementComponent } from '../ajouter-evenement/ajouter-evenement.component';
+import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
+import { MenuComponent } from "../menu/menu.component";
 
 @Component({
   selector: 'app-home',
@@ -31,7 +33,8 @@ import { AjouterEvenementComponent } from '../ajouter-evenement/ajouter-evenemen
     SignupComponent,
     HttpClientModule,
     AjouterEvenementComponent,
-  ],
+    MenuComponent
+],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
@@ -42,6 +45,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   map!: L.Map;
 
   isMapInitialized = false;
+
+  showAjouterEvenement: boolean = false;
 
   constructor(public authService: AuthService, private http: HttpClient, public dialog: MatDialog) {}
 
@@ -79,8 +84,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   
 
     this.map = L.map('map', {
-      center: [51.505, -0.09], // Latitude, Longitude
-      zoom: 13,
+      center: [43.61736043171063, 7.064343879369045], // Centre de la France
+      zoom: 6,
     });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -94,10 +99,43 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.ajouterEvenementComponent?.mettreAJourCoordonnees(e.latlng.lat, e.latlng.lng);
     });
 
-    //  L.marker([51.505, -0.09])
-    //    .addTo(this.map)
-    //    .bindPopup('Hello from London!')
-    //    .openPopup();
+    // Définir la zone de recherche à la France
+    const franceBoundingBox = {
+      minX: -5.3173828125,
+      minY: 41.32732632036622,
+      maxX: 9.560546875,
+      maxY: 51.12421275782688
+    };
+
+     // Ajouter la barre de recherche avec OpenStreetMapProvider
+     const provider = new OpenStreetMapProvider({
+      params: {
+        viewbox: `${franceBoundingBox.minX},${franceBoundingBox.minY},${franceBoundingBox.maxX},${franceBoundingBox.maxY}`,
+        bounded: 1,
+        countrycodes: 'FR', // Code pays pour restreindre à la France
+      },
+    });
+
+     const searchControl = GeoSearchControl({
+       provider: provider,
+       style: 'bar',
+       showMarker: true,
+       showPopup: true,
+       marker: {
+         icon: iconDefault,
+         draggable: false,
+       },
+       maxMarkers: 1,
+       retainZoomLevel: false,
+       animateZoom: true,
+       autoClose: true,
+       searchLabel: 'Entrez une adresse',
+       keepResult: true,
+     });
+ 
+     this.map.addControl(searchControl);
+
+
   }
 
   private async loadUserAndShops(): Promise<void> {
@@ -120,7 +158,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       console.error('Erreur lors de la récupération de la position de l\'utilisateur', error);
   
       // Utilisation d'une position par défaut si la géolocalisation échoue
-      const fallbackLocation = { lat: 51.505, lon: -0.09 }; // Position par défaut à Londres
+      const fallbackLocation = { lat: 43.61736577171462, lon: 7.064337173847 }; // Position par défaut à Londres
       console.log('Utilisation de la position de repli:', fallbackLocation);
   
       this.map.setView([fallbackLocation.lat, fallbackLocation.lon], 13);
@@ -128,7 +166,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       // Ajouter un marqueur pour la position de repli
       L.marker([fallbackLocation.lat, fallbackLocation.lon])
         .addTo(this.map)
-        .bindPopup('Position par défaut')
+        .bindPopup('MIAGE SOPHIA ANTIPOLIS')
         .openPopup();
   
       // Recherche des commerces autour de la position par défaut
@@ -243,9 +281,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   onEvenementAjoute(event: any): void {
     const eventIcon = L.icon({
       iconUrl: '../../../assets/banner.png',
-      iconSize: [32, 32],
-      iconAnchor: [16, 32],
-      popupAnchor: [0, -32],
+      iconSize: [45, 45],
+      iconAnchor: [16, 45],
+      popupAnchor: [0, -45],
     });
 
     // Ajouter un marqueur sur la carte
@@ -298,5 +336,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.authService.logout().catch((error) => {
       console.error('Erreur de déconnexion', error);
     });
+  }
+
+  toggleAjouterEvenement(): void {
+    this.showAjouterEvenement = !this.showAjouterEvenement;
   }
 }
