@@ -2,9 +2,12 @@
 
 <div *ngIf="authService.isLoggedIn() | async; else notLoggedIn">
   <h2>Bienvenue, {{ authService.getUserEmail() | async}} !</h2>
-  
+  <app-ajouter-evenement (evenementAjoute)="onEvenementAjoute($event)"></app-ajouter-evenement>
   <div id="map" style="height: 500px;"></div>
 
+  
+
+  
 
   <ng-template #notLoggedIn>
     <div class="auth-container">

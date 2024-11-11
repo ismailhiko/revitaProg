@@ -1,0 +1,19 @@
+.shop-details {
+    max-width: 400px;
+    padding: 16px;
+    text-align: center;
+  }
+  
+  .shop-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 16px;
+  }
+  

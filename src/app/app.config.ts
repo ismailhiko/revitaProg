@@ -10,6 +10,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()), provideAnimationsAsync()
+    provideAuth(() => getAuth()), provideAnimationsAsync(), provideAnimationsAsync()
   ]
 };

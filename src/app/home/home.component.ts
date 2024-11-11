@@ -7,13 +7,16 @@ import { SignupComponent } from '../signup/signup.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { GoogleMapsModule } from '@angular/google-maps';
 import {
   HttpClient,
   HttpClientModule,
   HttpHeaders,
+  HttpParams
 } from '@angular/common/http';
+import { ShopDetailsComponent } from '../shop-details/shop-details.component';
 import * as L from 'leaflet';
+import { MatDialog } from '@angular/material/dialog';
+import { AjouterEvenementComponent } from '../ajouter-evenement/ajouter-evenement.component';
 
 @Component({
   selector: 'app-home',
@@ -26,8 +29,8 @@ import * as L from 'leaflet';
     MatCardModule,
     LoginComponent,
     SignupComponent,
-    GoogleMapsModule,
     HttpClientModule,
+    AjouterEvenementComponent,
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
@@ -40,7 +43,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   isMapInitialized = false;
 
-  constructor(public authService: AuthService, private http: HttpClient) {}
+  constructor(public authService: AuthService, private http: HttpClient, public dialog: MatDialog) {}
 
   ngAfterViewInit(): void {
     this.authService.isLoggedIn().subscribe((isLoggedIn) => {
@@ -48,6 +51,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         
         setTimeout(() => {
           this.initMap();
+          this.loadUserAndShops();
         }, 500);
         console.log('MAP EN COURS DE CHARGEMENT');
       }
@@ -84,11 +88,196 @@ export class HomeComponent implements OnInit, AfterViewInit {
       attribution: '© OpenStreetMap',
     }).addTo(this.map);
 
-    L.marker([51.505, -0.09])
-      .addTo(this.map)
-      .bindPopup('Hello from London!')
-      .openPopup();
+     // Écouter les clics sur la carte pour mettre à jour les coordonnées dans le formulaire
+     this.map.on('click', (e: L.LeafletMouseEvent) => {
+      // Mise à jour des coordonnées dans le composant enfant `AjouterEvenementComponent`
+      this.ajouterEvenementComponent?.mettreAJourCoordonnees(e.latlng.lat, e.latlng.lng);
+    });
+
+    //  L.marker([51.505, -0.09])
+    //    .addTo(this.map)
+    //    .bindPopup('Hello from London!')
+    //    .openPopup();
   }
+
+  private async loadUserAndShops(): Promise<void> {
+    try {
+      const userLocation = await this.getUserLocation();
+      console.log('Position de l\'utilisateur:', userLocation);
+  
+      // Centrer la carte sur la position de l'utilisateur
+      this.map.setView([userLocation.lat, userLocation.lon], 15);
+  
+      // Ajouter un marqueur pour l'utilisateur
+      L.marker([userLocation.lat, userLocation.lon])
+        .addTo(this.map)
+        .bindPopup('Vous êtes ici')
+        .openPopup();
+  
+      // Recherche des commerces autour de la position de l'utilisateur
+      this.searchNearbyShops(userLocation.lat, userLocation.lon);
+    } catch (error) {
+      console.error('Erreur lors de la récupération de la position de l\'utilisateur', error);
+  
+      // Utilisation d'une position par défaut si la géolocalisation échoue
+      const fallbackLocation = { lat: 51.505, lon: -0.09 }; // Position par défaut à Londres
+      console.log('Utilisation de la position de repli:', fallbackLocation);
+  
+      this.map.setView([fallbackLocation.lat, fallbackLocation.lon], 13);
+  
+      // Ajouter un marqueur pour la position de repli
+      L.marker([fallbackLocation.lat, fallbackLocation.lon])
+        .addTo(this.map)
+        .bindPopup('Position par défaut')
+        .openPopup();
+  
+      // Recherche des commerces autour de la position par défaut
+      this.searchNearbyShops(fallbackLocation.lat, fallbackLocation.lon);
+    }
+  }
+  
+
+  private getUserLocation(): Promise<{ lat: number; lon: number }> {
+    return new Promise((resolve, reject) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            resolve({
+              lat: position.coords.latitude,
+              lon: position.coords.longitude,
+            });
+          },
+          (error) => {
+            switch (error.code) {
+              case error.PERMISSION_DENIED:
+                console.error('L\'utilisateur a refusé la demande de géolocalisation.');
+                break;
+              case error.POSITION_UNAVAILABLE:
+                console.error('La localisation de l\'appareil est indisponible.');
+                break;
+              case error.TIMEOUT:
+                console.error('Le service de localisation a expiré.');
+                break;
+              default:
+                console.error('Erreur inconnue lors de la tentative de géolocalisation.');
+                break;
+            }
+            reject(error);
+          }
+        );
+      } else {
+        reject(new Error('La géolocalisation n\'est pas prise en charge par ce navigateur.'));
+      }
+    });
+  }
+
+  private searchNearbyShops(lat: number, lon: number): void {
+    const radius = 500; // Rayon de recherche en mètres
+    const overpassUrl = `https://overpass-api.de/api/interpreter`;
+  
+    const query = `
+      [out:json];
+      node
+        ["shop"]
+        (around:${radius},${lat},${lon});
+      out body;
+    `;
+  
+    const params = new HttpParams().set('data', query);
+  
+    this.http.get(overpassUrl, { params: params }).subscribe(
+      (response: any) => {
+  
+        const shopIcon = L.icon({
+          iconUrl: '../../../assets/store.png',
+          iconSize: [32, 32],
+          iconAnchor: [16, 32],
+          popupAnchor: [0, -32]
+        });
+  
+        if (response && response.elements) {
+          response.elements.forEach((element: any) => {
+            if (element.lat && element.lon) {
+              const shopName = element.tags.name || 'Nom inconnu';
+              const shopType = element.tags.shop || 'Type inconnu';
+              const address = element.tags['addr:street'] || 'Adresse inconnue';
+  
+              const marker = L.marker([element.lat, element.lon], { icon: shopIcon })
+                .addTo(this.map)
+                .on('click', () => {
+                  this.openShopDetails({
+                    name: shopName,
+                    type: shopType,
+                    address: address,
+                    rating: Math.random() * 5, // Simulation d'une note
+                    reviewsCount: Math.floor(Math.random() * 1000), // Simulation du nombre d'avis
+                    phoneNumber: '+33 1 23 45 67 89', // Exemple statique
+                    photoUrl: 'assets/images/shop-example.jpg' // Image d'exemple
+                  });
+                });
+            }
+          });
+        } else {
+          console.log('Aucun commerce trouvé.');
+        }
+      },
+      (error) => {
+        console.error('Erreur lors de la recherche des commerces à proximité', error);
+      }
+    );
+  }
+  
+  private openShopDetails(data: any): void {
+    this.dialog.open(ShopDetailsComponent, {
+      width: '400px',
+      data: data
+    });
+  }
+
+
+
+  // Référence au composant enfant
+  ajouterEvenementComponent!: AjouterEvenementComponent;
+
+  // Méthode pour ajouter un événement sur la carte
+  onEvenementAjoute(event: any): void {
+    const eventIcon = L.icon({
+      iconUrl: '../../../assets/banner.png',
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -32],
+    });
+
+    // Ajouter un marqueur sur la carte
+    L.marker([event.latitude, event.longitude], {
+      icon: eventIcon,
+    })
+      .addTo(this.map)
+      .bindPopup(`
+        <div>
+          <h4>${event.name}</h4>
+          <p>${event.description}</p>
+          <p><strong>Date :</strong> ${new Date(event.date).toLocaleDateString()}</p>
+        </div>
+      `);
+  }
+
+  handleAjouterEvenement(event: any): void {
+    if (this.map) {
+      const { latitude, longitude, name, description } = event;
+
+      L.marker([latitude, longitude])
+        .addTo(this.map)
+        .bindPopup(`
+          <strong>${name}</strong><br>
+          ${description ? description : 'Pas de description'}
+        `)
+        .openPopup();
+    } else {
+      console.error('La carte n\'est pas initialisée.');
+    }
+  }
+  
 
   
 

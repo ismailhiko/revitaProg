@@ -1,0 +1,25 @@
+<div class="shop-details">
+    <img *ngIf="data.photoUrl" [src]="data.photoUrl" alt="{{ data.name }}" class="shop-photo" />
+    <h2>{{ data.name }}</h2>
+    <p>Évaluation : <strong>{{ data.rating }}</strong> ★ ({{ data.reviewsCount }} avis)</p>
+    <p><strong>Type :</strong> {{ data.type }}</p>
+    <p><strong>Adresse :</strong> {{ data.address }}</p>
+    <p><strong>Téléphone :</strong> {{ data.phoneNumber }}</p>
+  
+    <div class="actions">
+      <button mat-button>Itinéraires</button>
+      <button mat-button>Enregistrer</button>
+      <button mat-button>À proximité</button>
+      <button mat-button>Envoyer vers un téléphone</button>
+      <button mat-button>Partager</button>
+    </div>
+    <a [href]="'https://www.google.com/maps/dir/?api=1&destination=' + data.lat + ',' + data.lon" target="_blank">
+        <button mat-button>Itinéraires</button>
+      </a>
+  
+    <button mat-button (click)="onClose()">Fermer</button>
+  </div>
+
+ 
+  
+  
