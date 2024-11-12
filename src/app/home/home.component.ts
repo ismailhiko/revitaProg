@@ -51,8 +51,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   showAjouterEvenement: boolean = false;
 
-  modeAffichage: 'evenements' | 'locaux' = 'evenements'; // Valeur par défaut : recherche d'événements
-
+  modeAffichage:String = 'evenements';
 
   constructor(public authService: AuthService, private http: HttpClient, public dialog: MatDialog) {}
 
@@ -75,6 +74,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   private initMap(): void {
+
+    if (this.map) {
+      // Détruire la carte précédente pour éviter des problèmes d'initialisation multiple
+      this.map.remove();
+    }
 
     const iconDefault = L.icon({
       iconUrl: '../../../assets/marker-icon.png',
@@ -180,14 +184,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
 
-
-  toggleAfficherEvenements() {
-    this.modeAffichage = 'evenements';
-  }
-
-  toggleAfficherLocaux() {
-    this.modeAffichage = 'locaux';
-  }
   
 
   private getUserLocation(): Promise<{ lat: number; lon: number }> {
@@ -250,7 +246,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   
         if (response && response.elements) {
           response.elements.forEach((element: any) => {
-            console.log('Commerce trouvé:', element);
             if (element.lat && element.lon) {
               const shopName = element.tags.name || 'Nom inconnu';
               const shopType = element.tags.shop || 'Type inconnu';
@@ -362,5 +357,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   toggleAjouterEvenement(): void {
     this.showAjouterEvenement = !this.showAjouterEvenement;
+  }
+
+  onModeChange(newMode: string): void {
+    this.modeAffichage = newMode;
+
+    if (this.modeAffichage === 'evenements') {
+      setTimeout(() => {
+        this.initMap();
+        this.loadUserAndShops();
+      }, 0);
+    }
   }
 }

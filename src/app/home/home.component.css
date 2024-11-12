@@ -1,3 +1,9 @@
+.conteneur{
+  
+  margin-right: 50px;
+  margin-left: 50px;
+  
+}
 .auth-container {
     display: flex;
     flex-direction: column;
@@ -106,7 +112,7 @@
     color: #333; /* Couleur du bouton */
     font-size: 16px;
     border-radius: 10px;
-    font-weight: 600;
+    font-weight: 300;
     cursor: pointer;
     transition: color 0.3s;
 

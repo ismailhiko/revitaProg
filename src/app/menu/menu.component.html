@@ -1,8 +1,15 @@
-<div class="menu">
+<div class="menu-container">
+  <div class="menu">
     <button mat-raised-button color="primary" (click)="ajouterEvenement()">
-        <img src="../../assets/location.png" alt="Icône Ajouter" class="icon" />
+      <img src="../../assets/location.png" alt="Icône Ajouter" class="icon" />
       Ajouter un événement
     </button>
+
+    <button mat-raised-button color="primary" (click)="setModeAffichage('evenements')">
+      Rechercher des événements
+    </button>
+    <button mat-raised-button color="primary" (click)="setModeAffichage('locaux')">
+      Rechercher des locaux
+    </button>
   </div>
-  
-  
+</div>

@@ -9,10 +9,20 @@ import { AjouterEvenementComponent } from "../ajouter-evenement/ajouter-evenemen
   imports: [AjouterEvenementComponent],
 })
 export class MenuComponent {
-[x: string]: any;
+
+  modeAffichage: 'evenements' | 'locaux' = 'evenements'; // Valeur par défaut : recherche d'événements
+
+  [x: string]: any;
+
   @Output() ajouterEvenementClicked = new EventEmitter<void>();
+
+  @Output() modeChange = new EventEmitter<string>();
 
   ajouterEvenement(): void {
     this.ajouterEvenementClicked.emit();
+  }
+
+  setModeAffichage(mode: string): void {
+    this.modeChange.emit(mode);
   }
 }

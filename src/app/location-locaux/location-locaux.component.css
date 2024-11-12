@@ -3,10 +3,11 @@
   }
   
   #map {
-    margin: 20px auto;
     width: 100%;
-    max-width: 600px;
-    height: 400px;
+    height: 500px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Ombre douce pour la carte */
+    margin-top: 20px;
   }
   
   .local-list {
@@ -57,13 +58,17 @@
   }
   
   .btn-search, .btn-location {
-    background-color: #007bff;
-    color: white;
+    background-color: #0a2540; /* Bleu foncé */
+    color: #ffffff; /* Texte blanc */
+    border-radius: 25px;
+    font-weight: bold;
     border: none;
+    transition: all 0.3s ease;
     cursor: pointer;
   }
   
   .btn-search:hover, .btn-location:hover {
-    background-color: #0056b3;
+    background-color: #666; /* Gris foncé pour le survol */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   }
   

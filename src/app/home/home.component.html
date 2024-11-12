@@ -1,17 +1,9 @@
+<div class="conteneur">
 <div *ngIf="authService.isLoggedIn() | async; else notLoggedIn">
   <h2 class="welcome-message">Bienvenue, {{ authService.getUserEmail() | async }} !</h2>
   <hr class="underline">
-  <app-menu (ajouterEvenementClicked)="toggleAjouterEvenement()"></app-menu>
+  <app-menu (ajouterEvenementClicked)="toggleAjouterEvenement()" (modeChange)="onModeChange($event)"></app-menu>
 
-  <!-- Boutons de bascule entre la recherche d'événements et de locaux -->
-  <div class="toggle-buttons">
-    <button mat-raised-button color="primary" (click)="toggleAfficherEvenements()">
-      Rechercher des événements
-    </button>
-    <button mat-raised-button color="accent" (click)="toggleAfficherLocaux()">
-      Rechercher des locaux
-    </button>
-  </div>
 
   <!-- Affichage conditionnel de la recherche d'événements -->
   <div *ngIf="modeAffichage === 'evenements'">
@@ -44,3 +36,4 @@
     </div>
   </div>
 </ng-template>
+</div>
