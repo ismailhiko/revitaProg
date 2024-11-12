@@ -19,6 +19,9 @@
           <h4>{{ local.name }}</h4>
           <p>{{ local.address }}</p>
           <p>Type : {{ local.type }}</p>
+  
+          <!-- Bouton pour ouvrir la popup de réservation -->
+          <button mat-raised-button color="primary" (click)="ouvrirReservation(local.name)">Réserver</button>
         </div>
       </li>
     </ul>
