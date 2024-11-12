@@ -1,14 +1,16 @@
+<div class="conteneur">
 <h2 mat-dialog-title>Réserver pour {{ data.localId }}</h2>
-<div mat-dialog-content>
-  <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="outline" class="full-width">
+
+  <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()" class="form-container">
+
+    <mat-form-field appearance="outline" >
       <mat-label>Date de début</mat-label>
       <input matInput [matDatepicker]="startPicker" formControlName="startDate">
       <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
       <mat-datepicker #startPicker></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
+    <mat-form-field appearance="outline">
       <mat-label>Date de fin</mat-label>
       <input matInput [matDatepicker]="endPicker" formControlName="endDate">
       <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
@@ -17,7 +19,7 @@
   </form>
 </div>
 
-<div mat-dialog-actions align="end">
-  <button mat-button (click)="onClose()">Annuler</button>
-  <button mat-raised-button color="primary" (click)="onSubmit()">Réserver</button>
+<div class="param-button">
+  <button (click)="onClose()">Annuler</button>
+  <button (click)="onSubmit()">Réserver</button>
 </div>

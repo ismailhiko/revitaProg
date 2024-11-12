@@ -138,3 +138,7 @@ button[mat-raised-button].logout:hover {
   cursor: pointer;
   transition: color 0.3s;
 }
+
+.participer-button:hover {
+  color: #666; /* Changement de couleur au survol */
+}

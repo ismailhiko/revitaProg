@@ -1,0 +1,41 @@
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    padding: 12px;
+    background-color: #0a2540; /* Bleu foncé */
+    color: #ffffff; /* Texte blanc */
+    border-radius: 25px;
+    font-weight: bold;
+    border: none;
+    transition: all 0.3s ease;
+    margin-bottom: 5px;
+    flex-direction: column;
+}
+
+button:hover{
+    background-color: #666; /* Gris foncé pour le survol */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.conteneur,
+mat-dialog-actions, .param-button {
+  display: flex;
+  justify-content: center; /* Centre les enfants horizontalement */
+  align-items: center; /* Centre les enfants verticalement (facultatif) */
+  flex-direction: column; /* Alignement vertical des éléments, si nécessaire */
+}
+
+.form-container {
+    display: flex; 
+    justify-content: center; /* Centre les enfants horizontalement */
+    align-items: center; /* Centre les enfants verticalement (facultatif) */
+    gap: 20px; /* Espacement entre les champs de formulaire */
+    flex-wrap: wrap; /* Pour gérer la disposition lorsque l'espace est limité */
+  }
+  
+  mat-form-field {
+    width: 300px; /* Optionnel : Vous pouvez ajuster la largeur de chaque champ pour les garder proportionnés */
+  }
+  

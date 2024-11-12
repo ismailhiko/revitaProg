@@ -17,6 +17,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
   }
   
   .local-item {
@@ -32,6 +33,13 @@
     height: auto;
     border-radius: 4px;
     margin-bottom: 10px;
+  }
+
+  .local-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
   
   .local-info h4 {
@@ -72,5 +80,33 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   }
   
+
+  button[mat-raised-button] {
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      padding: 12px;
+      background-color: #0a2540; /* Bleu foncé */
+      color: #ffffff; /* Texte blanc */
+      border-radius: 25px;
+      font-weight: bold;
+      border: none;
+      transition: all 0.3s ease;
+      margin-bottom: 5px;
+      flex-direction: column;
+      margin-top: 10px;
+  }
+  
+  button[mat-raised-button]:hover{
+    background-color: #666; /* Gris foncé pour le survol */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+
+  button[mat-raised-button]:hover {
+    color: #666; /* Couleur du bouton au survol */
+  }
 
   
