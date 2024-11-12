@@ -3,6 +3,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import * as L from 'leaflet';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ReservationLocauxComponent } from '../reservation-locaux/reservation-locaux.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 
@@ -14,7 +19,10 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./location-locaux.component.css'],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ReservationLocauxComponent,
+    MatDatepickerModule,
+    MatInputModule
   ]
 })
 export class LocationLocauxComponent implements OnInit {
@@ -105,7 +113,8 @@ export class LocationLocauxComponent implements OnInit {
   }
   ];
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {
+  constructor(private http: HttpClient, private fb: FormBuilder,     public dialog: MatDialog 
+  ) {
     this.searchForm = this.fb.group({
       address: [''],
       radius: [10000] // Rayon par défaut de 10 km en mètres
@@ -144,6 +153,22 @@ export class LocationLocauxComponent implements OnInit {
     } else {
       alert('La géolocalisation n\'est pas supportée par votre navigateur.');
     }
+  }
+
+  // Ouvrir la boîte de dialogue de réservation pour un local donné
+  ouvrirReservation(localId: string): void {
+    const dialogRef = this.dialog.open(ReservationLocauxComponent, {
+      
+      width: '400px',
+      data: { localId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Réservation confirmée :', result);
+        // Ajoutez ici le traitement de la réservation, par exemple, en envoyant une requête HTTP
+      }
+    });
   }
 
   // Recherche de locaux à proximité d'une position
