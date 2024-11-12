@@ -62,6 +62,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         setTimeout(() => {
           this.initMap();
           this.loadUserAndShops();
+          this.placeEventsOnMap();
         }, 500);
         console.log('MAP EN COURS DE CHARGEMENT');
       }
@@ -103,11 +104,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       attribution: '© OpenStreetMap',
     }).addTo(this.map);
 
-     // Écouter les clics sur la carte pour mettre à jour les coordonnées dans le formulaire
-     this.map.on('click', (e: L.LeafletMouseEvent) => {
-      // Mise à jour des coordonnées dans le composant enfant `AjouterEvenementComponent`
-      this.ajouterEvenementComponent?.mettreAJourCoordonnees(e.latlng.lat, e.latlng.lng);
-    });
 
     // Définir la zone de recherche à la France
     const franceBoundingBox = {
@@ -293,19 +289,69 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   // Référence au composant enfant
   ajouterEvenementComponent!: AjouterEvenementComponent;
+  tableauEvenement: any = [{
+    address: "INPI, Route des Lucioles, Sophia Antipolis 2, Sophia Antipolis, Biot, Grasse, Alpes-Maritimes, Provence-Alpes-Côte d'Azur, France",
+    date: new Date("2024-11-15T00:00:00+01:00"),
+    description: "Présentation des nouvelles technologies en matière de brevets et innovation.",
+    latitude: 43.6160457,
+    longitude: 7.064553727394159,
+    name: "Conférence INPI"
+  },
+  {
+    address: "Amadeus, 485 Route des Lucioles, Sophia Antipolis, Valbonne, Alpes-Maritimes, Provence-Alpes-Côte d'Azur, France",
+    date: new Date("2024-11-20T09:00:00+01:00"),
+    description: "Forum sur la digitalisation et l'innovation dans le secteur du tourisme.",
+    latitude: 43.6145103,
+    longitude: 7.0681652,
+    name: "Forum Amadeus"
+  },
+  {
+    address: "SKEMA Business School, 60 Rue Dostoïevski, Sophia Antipolis, Valbonne, Alpes-Maritimes, Provence-Alpes-Côte d'Azur, France",
+    date: new Date("2024-11-18T14:00:00+01:00"),
+    description: "Conférence sur les nouvelles tendances en marketing digital.",
+    latitude: 43.6179091,
+    longitude: 7.0695892,
+    name: "Conférence Marketing Digital"
+  },
+  {
+    address: "Sophia Tech, 930 Route des Colles, Sophia Antipolis, Biot, Alpes-Maritimes, Provence-Alpes-Côte d'Azur, France",
+    date: new Date("2024-11-22T10:00:00+01:00"),
+    description: "Atelier de codage pour les développeurs juniors.",
+    latitude: 43.619917,
+    longitude: 7.061717,
+    name: "Atelier de Codage"
+  },
+  {
+    address: "Espaces Antipolis, 300 Route des Crêtes, Sophia Antipolis, Biot, Alpes-Maritimes, Provence-Alpes-Côte d'Azur, France",
+    date: new Date("2024-11-25T16:00:00+01:00"),
+    description: "Réunion des entrepreneurs locaux pour échanger des idées et opportunités.",
+    latitude: 43.6184992,
+    longitude: 7.0577971,
+    name: "Réunion Entrepreneurs"
+  },
+  {
+    address: "Park Hotel Sophia, 3550 Route des Dolines, Sophia Antipolis, Valbonne, Alpes-Maritimes, Provence-Alpes-Côte d'Azur, France",
+    date: new Date("2024-11-27T18:00:00+01:00"),
+    description: "Rencontre des anciens étudiants des écoles de Sophia.",
+    latitude: 43.615656,
+    longitude: 7.050856,
+    name: "Rencontre Alumni Sophia"
+  }];
+
+   eventIcon = L.icon({
+    iconUrl: '../../../assets/banner.png',
+    iconSize: [45, 45],
+    iconAnchor: [16, 45],
+    popupAnchor: [0, -45],
+  });
 
   // Méthode pour ajouter un événement sur la carte
   onEvenementAjoute(event: any): void {
-    const eventIcon = L.icon({
-      iconUrl: '../../../assets/banner.png',
-      iconSize: [45, 45],
-      iconAnchor: [16, 45],
-      popupAnchor: [0, -45],
-    });
-
+    
+    this.tableauEvenement.push(event);
     // Ajouter un marqueur sur la carte
     L.marker([event.latitude, event.longitude], {
-      icon: eventIcon,
+      icon: this.eventIcon,
     })
       .addTo(this.map)
       .bindPopup(`
@@ -315,6 +361,24 @@ export class HomeComponent implements OnInit, AfterViewInit {
           <p><strong>Date :</strong> ${new Date(event.date).toLocaleDateString()}</p>
         </div>
       `);
+  }
+
+  placeEventsOnMap(): void {
+    this.tableauEvenement.forEach((event: any) => {
+      console.log('Evénement:', event);
+      L.marker([event.latitude, event.longitude], {
+        icon :this.eventIcon,
+      })
+        .addTo(this.map)
+        .bindPopup(`
+          <div>
+            <h4>${event.name}</h4>
+            <p>${event.description}</p>
+            <p><strong>Date :</strong> ${new Date(event.date).toLocaleDateString()}</p>
+          </div>
+        `);
+    }
+    );
   }
 
   handleAjouterEvenement(event: any): void {
@@ -366,6 +430,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       setTimeout(() => {
         this.initMap();
         this.loadUserAndShops();
+        this.placeEventsOnMap();
       }, 0);
     }
   }
