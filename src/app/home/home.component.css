@@ -1,135 +1,140 @@
-.conteneur{
-  
+.conteneur {
   margin-right: 50px;
   margin-left: 50px;
-  
 }
 .auth-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  .toggle-buttons button {
-    background-color: #028090;
-    color: white;
-    padding: 12px 25px;
-    margin: 15px 0;
-    font-size: 1.1rem;
-    border-radius: 8px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-  }
-  
-  .toggle-buttons button:hover {
-    background-color: #05668d;
-  }
-  
-  .auth-form {
-    width: 100%;
-    max-width: 500px;
-    margin: 20px auto;
-  }
-  
-  h2 {
-    font-size: 2.5rem;
-    color: #028090;
-    text-align: center;
-  }
-  
-  button[mat-raised-button].logout {
-    background-color: #d32f2f;
-    color: white;
-    margin-top: 25px;
-    padding: 10px 20px;
-    font-size: 1.1rem;
-    border-radius: 5px;
-  }
-  
-  button[mat-raised-button].logout:hover {
-    background-color: #b71c1c;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
 
-  .map-container {
-    width: 100%;
-    height: 500px; /* Ajustez cette valeur pour augmenter ou diminuer la hauteur */
-    margin-top: 20px;
-    border: 2px solid #028090;
-    border-radius: 8px;
-  }
-  
-  .leaflet-control-geosearch {
-    width: 300px !important; /* Ajuster la largeur de la barre de recherche */
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
-  }
-  
-  .leaflet-control-geosearch input {
-    height: 30px !important; /* Ajuster la hauteur de l'input */
-    font-size: 16px !important;
-    padding: 5px;
-  }
-  
-  .leaflet-control-geosearch button {
-    height: 30px;
-    width: 30px;
-    background-color: #007bff;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .leaflet-control-geosearch input:focus {
-    border-color: #007bff;
-  }
+.toggle-buttons button {
+  background-color: #028090;
+  color: white;
+  padding: 12px 25px;
+  margin: 15px 0;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
 
+.toggle-buttons button:hover {
+  background-color: #05668d;
+}
 
-  /* style elegant pour le formulaire */
-  #map {
-    width: 100%;
-    height: 500px;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Ombre douce pour la carte */
-    margin-top: 20px;
-  }
-  
-  .welcome-message {
-    font-size: 24px;
-    color: #333;
-    margin: 20px 0;
-  }
-  
-  .welcome-message span {
-    font-style: italic;
-    color: #666; /* Texte de bienvenue en italique */
-  }
-  #deconnexion {
-    display: block;
-    margin: 20px auto; /* Centre horizontalement */
-    background-color: transparent;
-    color: #333; /* Couleur du bouton */
-    font-size: 16px;
-    border-radius: 10px;
-    font-weight: 300;
-    cursor: pointer;
-    transition: color 0.3s;
+.auth-form {
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+}
 
-  }
+h2 {
+  font-size: 2.5rem;
+  color: #028090;
+  text-align: center;
+}
 
-  #deconnexion:hover {
-    color: #666; /* Changement de couleur au survol */
-  }
+button[mat-raised-button].logout {
+  background-color: #d32f2f;
+  color: white;
+  margin-top: 25px;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+}
 
-  .underline {
-    width: 25%; /* Largeur de la ligne */
-    margin: 0 auto; /* Centrer la ligne */
-    border: 0; /* Supprimer la bordure par défaut */
-    border-bottom: 1px solid #333; /* Bordure grise claire */
-    margin-top: 10px; /* Espacement au-dessus */
-    margin-bottom: 30px;
-  }
-  
-  
-  
+button[mat-raised-button].logout:hover {
+  background-color: #b71c1c;
+}
+
+.map-container {
+  width: 100%;
+  height: 500px; /* Ajustez cette valeur pour augmenter ou diminuer la hauteur */
+  margin-top: 20px;
+  border: 2px solid #028090;
+  border-radius: 8px;
+}
+
+.leaflet-control-geosearch {
+  width: 300px !important; /* Ajuster la largeur de la barre de recherche */
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+
+.leaflet-control-geosearch input {
+  height: 30px !important; /* Ajuster la hauteur de l'input */
+  font-size: 16px !important;
+  padding: 5px;
+}
+
+.leaflet-control-geosearch button {
+  height: 30px;
+  width: 30px;
+  background-color: #007bff;
+  border: none;
+  cursor: pointer;
+}
+
+.leaflet-control-geosearch input:focus {
+  border-color: #007bff;
+}
+
+/* style elegant pour le formulaire */
+#map {
+  width: 100%;
+  height: 500px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Ombre douce pour la carte */
+  margin-top: 20px;
+}
+
+.welcome-message {
+  font-size: 24px;
+  color: #333;
+  margin: 20px 0;
+}
+
+.welcome-message span {
+  font-style: italic;
+  color: #666; /* Texte de bienvenue en italique */
+}
+#deconnexion {
+  display: block;
+  margin: 20px auto; /* Centre horizontalement */
+  background-color: transparent;
+  color: #333; /* Couleur du bouton */
+  font-size: 16px;
+  border-radius: 10px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#deconnexion:hover {
+  color: #666; /* Changement de couleur au survol */
+}
+
+.underline {
+  width: 25%; /* Largeur de la ligne */
+  margin: 0 auto; /* Centrer la ligne */
+  border: 0; /* Supprimer la bordure par défaut */
+  border-bottom: 1px solid #333; /* Bordure grise claire */
+  margin-top: 10px; /* Espacement au-dessus */
+  margin-bottom: 30px;
+}
+
+.participer-button {
+  display: block;
+  margin: 20px auto; /* Centre horizontalement */
+  background-color: transparent;
+  color: #333; /* Couleur du bouton */
+  font-size: 16px;
+  border-radius: 10px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: color 0.3s;
+}

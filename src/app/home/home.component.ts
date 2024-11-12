@@ -375,6 +375,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             <h4>${event.name}</h4>
             <p>${event.description}</p>
             <p><strong>Date :</strong> ${new Date(event.date).toLocaleDateString()}</p>
+            <bouton class="participer-button">Participer</bouton>
           </div>
         `);
     }
