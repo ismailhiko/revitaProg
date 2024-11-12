@@ -31,87 +31,86 @@ export class LocationLocauxComponent implements OnInit {
   searchForm: FormGroup;
   markers: L.Marker[] = []; // Liste des marqueurs pour gérer l'affichage dynamique
   showLocauxList = false;
-  defaultLocaux: any[] = [
-    {
-      name: 'Boulangerie du Vieux Nice',
-      address: '15 Rue Droite, Nice',
-      type: 'Boulangerie',
-      imageUrl: '../assets/local.jpg', // Remplacez par une URL d'image réelle si possible
-      lat: 43.6977,
-      lon: 7.2719
-    },
-    {
-      name: 'Librairie de la Place',
-      address: '23 Place Massena, Nice',
-      type: 'Librairie',
-      imageUrl: '../assets/local.jpg',
-      lat: 43.6954,
-      lon: 7.2716
-    },
-    {
-      name: 'Café des Arts',
-      address: '2 Rue de la Préfecture, Nice',
-      type: 'Café',
-      imageUrl: '../assets/local.jpg',
-      lat: 43.6961,
-      lon: 7.2733
-    },
-    {
-      name: 'Épicerie Locale',
-      address: '8 Rue Saint-François de Paule, Nice',
-      type: 'Épicerie',
-      imageUrl: '../assets/local.jpg',
-      lat: 43.6958,
-      lon: 7.2730
-    },
-    {
-      name: 'Pharmacie Centrale',
-      address: '5 Rue Gioffredo, Nice',
-      type: 'Pharmacie',
-      imageUrl: '../assets/local.jpg',
-      lat: 43.6981,
-      lon: 7.2706
-    },
-    {
-      name: 'Bijouterie du Centre',
-      address: '10 Rue de l’Opéra, Nice',
-      type: 'Bijouterie',
-      imageUrl: '../assets/local.jpg',
-      lat: 43.6967,
-      lon: 7.2757
-    },
-    {
-      name: 'Restaurant Le Niçois',
-      address: '6 Rue de la Boucherie, Nice',
-      type: 'Restaurant',
-      imageUrl: '../assets/local.jpg',
-      lat: 43.6951,
-      lon: 7.2738
-    },
-    {
-      name: 'Fleuriste Au Soleil',
-      address: '18 Rue du Marché, Nice',
-      type: 'Fleuriste',
-      imageUrl: '../assets/local.jpg',
-      lat: 43.6954,
-      lon: 7.2722
-    },
-    {
-      name: 'Magasin Bio Naturellement',
-      address: '7 Avenue Félix Faure, Nice',
-      type: 'Magasin Bio',
-      imageUrl: '../assets/local.jpg',
-      lat: 43.6975,
-      lon: 7.2712
-    },
-    {
-      name: 'Salon de Thé La Pause',
-      address: '21 Rue de l’Abbaye, Nice',
-      type: 'Salon de Thé',
-      imageUrl: '../assets/local.jpg',
-      lat: 43.6963,
-      lon: 7.2744
-    }
+  defaultLocaux: any[] = [{
+    name: 'Boulangerie des Lucioles',
+    address: '15 Route des Lucioles, Sophia Antipolis',
+    type: 'Boulangerie',
+    imageUrl: '../assets/local.jpg', // Remplacez par une URL d'image réelle si possible
+    lat: 43.6165,
+    lon: 7.0655
+  },
+  {
+    name: 'Librairie de Sophia',
+    address: '23 Route des Dolines, Sophia Antipolis',
+    type: 'Librairie',
+    imageUrl: '../../assets/local.jpg',
+    lat: 43.6158,
+    lon: 7.0660
+  },
+  {
+    name: 'Café des Lucioles',
+    address: '2 Allée des Erables, Sophia Antipolis',
+    type: 'Café',
+    imageUrl: '../../assets/local.jpg',
+    lat: 43.6170,
+    lon: 7.0642
+  },
+  {
+    name: 'Épicerie Bio de Sophia',
+    address: '8 Avenue de Roumanille, Sophia Antipolis',
+    type: 'Épicerie',
+    imageUrl: '../../assets/local.jpg',
+    lat: 43.6163,
+    lon: 7.0638
+  },
+  {
+    name: 'Pharmacie des Collines',
+    address: '5 Chemin des Crêtes, Sophia Antipolis',
+    type: 'Pharmacie',
+    imageUrl: '../../assets/local.jpg',
+    lat: 43.6157,
+    lon: 7.0651
+  },
+  {
+    name: 'Bijouterie des Dolines',
+    address: '10 Route des Dolines, Sophia Antipolis',
+    type: 'Bijouterie',
+    imageUrl: '../../assets/local.jpg',
+    lat: 43.6169,
+    lon: 7.0627
+  },
+  {
+    name: 'Restaurant Le Provençal',
+    address: '6 Avenue des Iris, Sophia Antipolis',
+    type: 'Restaurant',
+    imageUrl: '../../assets/local.jpg',
+    lat: 43.6172,
+    lon: 7.0645
+  },
+  {
+    name: 'Fleuriste des Lucioles',
+    address: '18 Rue de Sophia, Sophia Antipolis',
+    type: 'Fleuriste',
+    imageUrl: '../../assets/local.jpg',
+    lat: 43.6161,
+    lon: 7.0662
+  },
+  {
+    name: 'Magasin Bio Naturel',
+    address: '7 Avenue Albert Einstein, Sophia Antipolis',
+    type: 'Magasin Bio',
+    imageUrl: '../../assets/local.jpg',
+    lat: 43.6155,
+    lon: 7.0635
+  },
+  {
+    name: 'Salon de Thé Le Moment',
+    address: '21 Rue de Chêne Vert, Sophia Antipolis',
+    type: 'Salon de Thé',
+    imageUrl: '../../assets/local.jpg',
+    lat: 43.6175,
+    lon: 7.0649
+  }
   ];
 
   constructor(private http: HttpClient, private fb: FormBuilder,     public dialog: MatDialog 
@@ -205,10 +204,17 @@ export class LocationLocauxComponent implements OnInit {
       });
   }
 
+    localIcon = L.icon({
+    iconUrl: '../../assets/store-3.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32]
+  });
+
   // Affiche les locaux sur la carte avec des marqueurs et des popups
   private displayLocauxOnMap(): void {
     this.locaux.forEach(local => {
-      const marker = L.marker([local.lat, local.lon]).addTo(this.map);
+      const marker = L.marker([local.lat, local.lon], {icon:this.localIcon}).addTo(this.map);
       this.markers.push(marker);
 
       const popupContent = `

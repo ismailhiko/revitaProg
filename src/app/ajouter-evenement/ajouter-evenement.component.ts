@@ -56,14 +56,16 @@ export class AjouterEvenementComponent {
 
           this.evenementAjoute.emit(event);
 
-          // Enregistrer l'événement dans Firebase
-          this.eventService.addEvent(event)
-            .then(() => {
-              console.log('Événement enregistré dans Firebase avec succès');
-            })
-            .catch((error) => {
-              console.error('Erreur lors de l\'enregistrement de l\'événement dans Firebase', error);
-            });
+          console.log('Événement ajouté', event);
+
+          // // Enregistrer l'événement dans Firebase
+          // this.eventService.addEvent(event)
+          //   .then(() => {
+          //     console.log('Événement enregistré dans Firebase avec succès');
+          //   })
+          //   .catch((error) => {
+          //     console.error('Erreur lors de l\'enregistrement de l\'événement dans Firebase', error);
+          //   });
 
           this.eventForm.reset();
         } else {
@@ -92,11 +94,4 @@ export class AjouterEvenementComponent {
     );
   }
 
-  // Méthode pour mettre à jour les coordonnées en fonction du clic sur la carte
-  mettreAJourCoordonnees(lat: number, lon: number): void {
-    this.eventForm.patchValue({
-      latitude: lat,
-      longitude: lon,
-    });
-  }
 }
