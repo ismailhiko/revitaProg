@@ -27,7 +27,7 @@ export class LocationLocauxComponent implements OnInit {
     name: 'Boulangerie des Lucioles',
     address: '15 Route des Lucioles, Sophia Antipolis',
     type: 'Boulangerie',
-    imageUrl: '../../assets/store-3.png', // Remplacez par une URL d'image réelle si possible
+    imageUrl: '../assets/local.jpg', // Remplacez par une URL d'image réelle si possible
     lat: 43.6165,
     lon: 7.0655
   },
@@ -35,7 +35,7 @@ export class LocationLocauxComponent implements OnInit {
     name: 'Librairie de Sophia',
     address: '23 Route des Dolines, Sophia Antipolis',
     type: 'Librairie',
-    imageUrl: '../../assets/store-3.png',
+    imageUrl: '../../assets/local.jpg',
     lat: 43.6158,
     lon: 7.0660
   },
@@ -43,7 +43,7 @@ export class LocationLocauxComponent implements OnInit {
     name: 'Café des Lucioles',
     address: '2 Allée des Erables, Sophia Antipolis',
     type: 'Café',
-    imageUrl: '../../assets/store-3.png',
+    imageUrl: '../../assets/local.jpg',
     lat: 43.6170,
     lon: 7.0642
   },
@@ -51,7 +51,7 @@ export class LocationLocauxComponent implements OnInit {
     name: 'Épicerie Bio de Sophia',
     address: '8 Avenue de Roumanille, Sophia Antipolis',
     type: 'Épicerie',
-    imageUrl: '../../assets/store-3.png',
+    imageUrl: '../../assets/local.jpg',
     lat: 43.6163,
     lon: 7.0638
   },
@@ -59,7 +59,7 @@ export class LocationLocauxComponent implements OnInit {
     name: 'Pharmacie des Collines',
     address: '5 Chemin des Crêtes, Sophia Antipolis',
     type: 'Pharmacie',
-    imageUrl: '../../assets/store-3.png',
+    imageUrl: '../../assets/local.jpg',
     lat: 43.6157,
     lon: 7.0651
   },
@@ -67,7 +67,7 @@ export class LocationLocauxComponent implements OnInit {
     name: 'Bijouterie des Dolines',
     address: '10 Route des Dolines, Sophia Antipolis',
     type: 'Bijouterie',
-    imageUrl: '../../assets/store-3.png',
+    imageUrl: '../../assets/local.jpg',
     lat: 43.6169,
     lon: 7.0627
   },
@@ -75,7 +75,7 @@ export class LocationLocauxComponent implements OnInit {
     name: 'Restaurant Le Provençal',
     address: '6 Avenue des Iris, Sophia Antipolis',
     type: 'Restaurant',
-    imageUrl: '../../assets/store-3.png',
+    imageUrl: '../../assets/local.jpg',
     lat: 43.6172,
     lon: 7.0645
   },
@@ -83,7 +83,7 @@ export class LocationLocauxComponent implements OnInit {
     name: 'Fleuriste des Lucioles',
     address: '18 Rue de Sophia, Sophia Antipolis',
     type: 'Fleuriste',
-    imageUrl: '../../assets/store-3.png',
+    imageUrl: '../../assets/local.jpg',
     lat: 43.6161,
     lon: 7.0662
   },
@@ -91,7 +91,7 @@ export class LocationLocauxComponent implements OnInit {
     name: 'Magasin Bio Naturel',
     address: '7 Avenue Albert Einstein, Sophia Antipolis',
     type: 'Magasin Bio',
-    imageUrl: '../../assets/store-3.png',
+    imageUrl: '../../assets/local.jpg',
     lat: 43.6155,
     lon: 7.0635
   },
@@ -99,7 +99,7 @@ export class LocationLocauxComponent implements OnInit {
     name: 'Salon de Thé Le Moment',
     address: '21 Rue de Chêne Vert, Sophia Antipolis',
     type: 'Salon de Thé',
-    imageUrl: '../../assets/store-3.png',
+    imageUrl: '../../assets/local.jpg',
     lat: 43.6175,
     lon: 7.0649
   }
@@ -180,7 +180,7 @@ export class LocationLocauxComponent implements OnInit {
   }
 
     localIcon = L.icon({
-    iconUrl: '../../../assets/store-3.png',
+    iconUrl: '../../assets/store-3.png',
     iconSize: [32, 32],
     iconAnchor: [16, 32],
     popupAnchor: [0, -32]
