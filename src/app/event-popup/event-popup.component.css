@@ -1,0 +1,25 @@
+.event-popup {
+    display: flex;                  /* Active Flexbox */
+    flex-direction: column;         /* Arrange les enfants verticalement (en colonne) */
+    align-items: center;            /* Centre horizontalement les enfants */
+    justify-content: center;        /* Centre verticalement les enfants */
+    padding: 10px;                /* Hauteur de 100% de la hauteur de la fenêtre */
+    text-align: center;             /* Centre le texte à l'intérieur de chaque élément */
+  }
+  
+  .participer-button {
+    margin-top: 20px;               /* Ajoute de l'espace en haut du bouton */
+    padding: 10px 20px;             /* Espace intérieur du bouton */
+    background-color: #0a2540;      /* Couleur de fond */
+    color: #ffffff;                 /* Couleur du texte */
+    border: none;                   /* Pas de bordure */
+    border-radius: 25px;            /* Coins arrondis */
+    cursor: pointer;                /* Curseur en forme de main au survol */
+    font-weight: bold;              /* Texte en gras */
+    transition: all 0.3s ease;      /* Transition douce pour les effets de changement */
+  }
+  
+  .participer-button:hover {
+    background-color: #0056b3;      /* Couleur différente au survol */
+  }
+  

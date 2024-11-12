@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -20,6 +20,7 @@ import { AjouterEvenementComponent } from '../ajouter-evenement/ajouter-evenemen
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 import { MenuComponent } from "../menu/menu.component";
 import { LocationLocauxComponent } from '../location-locaux/location-locaux.component';
+import { EventPopupComponent } from '../event-popup/event-popup.component';
 
 
 @Component({
@@ -43,6 +44,7 @@ import { LocationLocauxComponent } from '../location-locaux/location-locaux.comp
 })
 export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('map', { static: false }) mapContainer!: ElementRef;
+
   isLogin: boolean = true;
 
   map!: L.Map;
@@ -366,20 +368,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
   placeEventsOnMap(): void {
     this.tableauEvenement.forEach((event: any) => {
       console.log('Evénement:', event);
-      L.marker([event.latitude, event.longitude], {
-        icon :this.eventIcon,
-      })
-        .addTo(this.map)
-        .bindPopup(`
-          <div>
-            <h4>${event.name}</h4>
-            <p>${event.description}</p>
-            <p><strong>Date :</strong> ${new Date(event.date).toLocaleDateString()}</p>
-            <bouton class="participer-button">Participer</bouton>
-          </div>
-        `);
-    }
-    );
+      const marker = L.marker([event.latitude, event.longitude], {
+        icon: this.eventIcon,
+      }).addTo(this.map).on('click', () => {
+        this.openPopup(event);
+      });
+    });
+  }
+
+  openPopup(event: any): void {
+    // Utiliser MatDialog pour ouvrir la popup avec les détails de l'événement
+    this.dialog.open(EventPopupComponent, {
+      width: '400px',
+      data: event // Passer l'objet de l'événement au composant
+    });
   }
 
   handleAjouterEvenement(event: any): void {

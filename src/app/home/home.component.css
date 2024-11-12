@@ -128,17 +128,24 @@ button[mat-raised-button].logout:hover {
 }
 
 .participer-button {
-  display: block;
-  margin: 20px auto; /* Centre horizontalement */
-  background-color: transparent;
-  color: #333; /* Couleur du bouton */
-  font-size: 16px;
-  border-radius: 10px;
-  font-weight: 300;
-  cursor: pointer;
-  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  padding: 12px;
+  background-color: #0a2540; /* Bleu foncé */
+  color: #ffffff; /* Texte blanc */
+  border-radius: 25px;
+  font-weight: bold;
+  border: none;
+  transition: all 0.3s ease;
+  margin-bottom: 5px;
+  flex-direction: column;
+  margin-top: 10px;
 }
 
 .participer-button:hover {
   color: #666; /* Changement de couleur au survol */
 }
+
+
